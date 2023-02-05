@@ -1,11 +1,11 @@
 # apex-code-benchmarking
 
-This repo contains util class for benchmarking apex performance. It is based on the (Advanced Apex Programming)[https://advancedapex.com/] book written by Dan Appleman. 
+This repo contains util class for benchmarking apex performance. It is based on the [Advanced Apex Programming](https://advancedapex.com/) book written by Dan Appleman. 
 
 
 
 ## How to use
-1. Deploy (BenchmarkUtilTest)[force-app\main\default\classes\Utils\BenchmarkUtilTest.cls] class to your org.
+1. Deploy [BenchmarkUtilTest](force-app\main\default\classes\Utils\BenchmarkUtilTest.cls) class to your org.
 2. Set Debug Log Level and Trace flag as following:
 
 | Log Category   | Log Level     |
@@ -57,4 +57,4 @@ USER_DEBUG [36]|ERROR|Reference Duration: 574 Target duration: 600 Benchmark Res
 ```
 
 ## Examples
-Check the (CompareIncrementation)[force-app\main\default\classes\Tests\CompareIncrementation.cls] class for example of comparing performance of incrementation operations.
+Check the [CompareIncrementation](force-app\main\default\classes\Tests\CompareIncrementation.cls) class for example of comparing performance of incrementation operations.
