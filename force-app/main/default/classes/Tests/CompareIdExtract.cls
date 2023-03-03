@@ -1,31 +1,26 @@
 @IsTest
-public class CompareMapMethods {
+public class CompareIdExtract {
   @IsTest
   static void compare() {
-    Integer loops = 1000000;
+    Integer loops = 100000;
     BenchmarkUtilTest b = new BenchmarkUtilTest();
 
-    Map<Integer, List<Integer>> referenceMap = new Map<Integer, List<Integer>>();
+    List<Account> accounts = [SELECT Id FROM Account LIMIT 500];
 
     // First operation to compare: Map.containsKey
     b.markReferenceStartTime();
     for (Integer i = 0; i < loops; i++) {
-      if (!referenceMap.containsKey(i)) {
-        referenceMap.put(i, new List<Integer>());
+      Set<Id> ids = new Set<Id>();
+      for (Account acc : accounts) {
+        ids.add(acc.Id);
       }
-
-      referenceMap.get(i).add(i);
     }
     b.markReferenceEndTime();
 
     // Second operation to compare: Map.get
     b.markTargetStartTime();
     for (Integer i = 0; i < loops; i++) {
-      if (referenceMap.get(i) == null) {
-        referenceMap.put(i, new List<Integer>());
-      }
-
-      referenceMap.get(i).add(i);
+      Set<Id> ids = new Map<Id, Account>(accounts).keySet();
     }
     b.markTargetEndTime();
 
