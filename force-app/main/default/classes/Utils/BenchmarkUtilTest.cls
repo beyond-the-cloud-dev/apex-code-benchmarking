@@ -34,9 +34,9 @@ public with sharing class BenchmarkUtilTest {
         singleOperationInMicroseconds /= loops;
         singleOperationInMicroseconds.setScale(2);
         System.debug(LoggingLevel.Error,
-                'Reference Duration: ' + referenceDuration +
-                        ' Target duration: ' + targetDuration +
-                        ' Benchmark Results: ' + benchmarkResults +
+                '\nReference Duration: ' + referenceDuration +
+                        '\nTarget duration: ' + targetDuration +
+                        '\nBenchmark Results: ' + benchmarkResults +
                         'ms or ' + singleOperationInMicroseconds + ' μs per operation');
     }
 }
