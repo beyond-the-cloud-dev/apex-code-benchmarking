@@ -7,7 +7,7 @@ public class CompareIdExtract {
 
     List<Account> accounts = [SELECT Id FROM Account LIMIT 500];
 
-    // First operation to compare: Map.containsKey
+    // First operation to compare: loop and get
     b.markReferenceStartTime();
     for (Integer i = 0; i < loops; i++) {
       Set<Id> ids = new Set<Id>();
@@ -17,7 +17,7 @@ public class CompareIdExtract {
     }
     b.markReferenceEndTime();
 
-    // Second operation to compare: Map.get
+    // Second operation to compare: transform to map and keySet
     b.markTargetStartTime();
     for (Integer i = 0; i < loops; i++) {
       Set<Id> ids = new Map<Id, Account>(accounts).keySet();
