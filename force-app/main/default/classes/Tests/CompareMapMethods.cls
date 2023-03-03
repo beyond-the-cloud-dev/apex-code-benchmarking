@@ -1,17 +1,10 @@
 @IsTest
 public class CompareMapMethods {
   @IsTest
-  static void compareContainsKeyAndGetMethods() {
-    Integer x = 0;
-    Integer y = 0;
-    Integer loops = 1000000;
+  static void compare() {
     BenchmarkUtilTest b = new BenchmarkUtilTest();
 
     Map<Integer, List<Integer>> referenceMap = new Map<Integer, List<Integer>>();
-
-    // for (Integer i = 0; i < 1000000; i++) {
-    //   referenceMap.put(i, i);
-    // }
 
     // First operation to compare: Map.containsKey
     b.markReferenceStartTime();
