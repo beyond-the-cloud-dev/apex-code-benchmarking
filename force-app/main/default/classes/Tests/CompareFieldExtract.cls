@@ -1,5 +1,5 @@
 @IsTest
-public class CompareIdExtract {
+public class CompareFieldExtract {
   @TestSetup
   static void makeData() {
     List<Account> accounts = new List<Account>();
@@ -14,22 +14,23 @@ public class CompareIdExtract {
     Integer loops = 100;
     BenchmarkUtilTest b = new BenchmarkUtilTest();
 
-    List<Account> accounts = [SELECT Id FROM Account];
+    List<Account> accounts = [SELECT Id, Name FROM Account];
 
     // First operation to compare: loop and get
     b.markReferenceStartTime();
     for (Integer i = 0; i < loops; i++) {
-      Set<Id> ids = new Set<Id>();
+      Set<String> names = new Set<String>();
       for (Account acc : accounts) {
-        ids.add(acc.Id);
+        names.add(acc.Name);
       }
     }
     b.markReferenceEndTime();
 
     // Second operation to compare: transform to map and keySet
+    List<AggregateResult> aggregate = [SELECT Name Id FROM Account GROUP BY Name];
     b.markTargetStartTime();
     for (Integer i = 0; i < loops; i++) {
-      Set<Id> ids = new Map<Id, Account>(accounts).keySet();
+      Set<String> names = new Map<String, SObject>(aggregate).keySet();
     }
     b.markTargetEndTime();
 
