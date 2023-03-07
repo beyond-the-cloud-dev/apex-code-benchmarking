@@ -8,8 +8,7 @@ public class CompareMapMethods {
 
         Map<Integer, List<Integer>> referenceMap = new Map<Integer, List<Integer>>();
 
-        // First operation to compare: Map.containsKey
-        b.startReferenceBenchmark();
+        b.start(0);
         for (Integer i = 0; i < loops; i++) {
             if (!referenceMap.containsKey(i)) {
                 referenceMap.put(i, new List<Integer>());
@@ -17,10 +16,9 @@ public class CompareMapMethods {
 
             referenceMap.get(i).add(i);
         }
-        b.endReferenceBenchmark();
+        b.end(0);
 
-        // Second operation to compare: Map.get
-        b.startTargetBenchmark();
+        b.start(1);
         for (Integer i = 0; i < loops; i++) {
             if (referenceMap.get(i) == null) {
                 referenceMap.put(i, new List<Integer>());
@@ -28,8 +26,8 @@ public class CompareMapMethods {
 
             referenceMap.get(i).add(i);
         }
-        b.endReferenceBenchmark();
+        b.end(1);
 
-        b.reportResults(loops);
+        b.reportAllResults();
     }
 }

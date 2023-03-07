@@ -10,19 +10,17 @@ public class CompareStringOperations {
             referenceValues.add(String.valueOf(i));
         }
 
-        // First operation to compare: String +=
-        b.startReferenceBenchmark();
+        b.start(0);
         String reference = '';
         for (String value : referenceValues) {
             reference += value + ',';
         }
-        b.endReferenceBenchmark();
+        b.end(0);
 
-        // Second operation to compare: String.join
-        b.startTargetBenchmark();
+        b.start(1);
         String target = String.join(referenceValues, ',');
-        b.endReferenceBenchmark();
+        b.end(1);
 
-        b.reportResults(1);
+        b.reportAllResults();
     }
 }

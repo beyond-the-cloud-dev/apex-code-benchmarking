@@ -17,23 +17,21 @@ public class CompareIdExtract {
 
         List<Account> accounts = [SELECT Id FROM Account]; // 5000
 
-        // First operation to compare: loop and get
-        b.startReferenceBenchmark();
+        b.start(0);
         for (Integer i = 0; i < loops; i++) {
             Set<Id> ids = new Set<Id>();
             for (Account acc : accounts) {
                 ids.add(acc.Id);
             }
         }
-        b.endReferenceBenchmark();
+        b.end(0);
 
-        // Second operation to compare: transform to map and keySet
-        b.startTargetBenchmark();
+        b.start(1);
         for (Integer i = 0; i < loops; i++) {
             Set<Id> ids = new Map<Id, Account>(accounts).keySet();
         }
-        b.endTargetBenchmark();
+        b.end(1);
 
-        b.reportResults(loops);
+        b.reportAllResults();
     }
 }

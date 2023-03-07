@@ -12,20 +12,20 @@ public class CompareIncrementation {
     BenchmarkUtilTest b = new BenchmarkUtilTest();
 
     // First operation to compare: ++ incrementation
-    b.markReferenceStartTime();
-    for (Integer i = 0; i < 1000000; i++) {
+    b.start(0);
+    for (Integer i = 0; i < loops; i++) {
       x++;
     }
-    b.markReferenceEndTime();
+    b.end(0);
 
     // Second operation to compare: + incrementation
-    b.markTargetStartTime();
-    for (Integer i = 0; i < 1000000; i++) {
+    b.start(1);
+    for (Integer i = 0; i < loops; i++) {
       y = y + 1;
     }
-    b.markTargetEndTime();
+    b.end(1);
 
     // Debug the results
-    b.reportResults(1000000);
+    b.reportAllResults();
   }
 }
