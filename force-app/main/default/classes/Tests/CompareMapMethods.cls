@@ -4,21 +4,12 @@ public class CompareMapMethods {
     @IsTest
     static void compare() {
         Integer loops = 100000;
+
         BenchmarkUtilTest b = new BenchmarkUtilTest();
 
         Map<Integer, List<Integer>> referenceMap = new Map<Integer, List<Integer>>();
 
-        b.start(0);
-        for (Integer i = 0; i < loops; i++) {
-            if (!referenceMap.containsKey(i)) {
-                referenceMap.put(i, new List<Integer>());
-            }
-
-            referenceMap.get(i).add(i);
-        }
-        b.end(0);
-
-        b.start(1);
+        b.start();
         for (Integer i = 0; i < loops; i++) {
             if (referenceMap.get(i) == null) {
                 referenceMap.put(i, new List<Integer>());
@@ -26,8 +17,26 @@ public class CompareMapMethods {
 
             referenceMap.get(i).add(i);
         }
-        b.end(1);
+        b.end();
 
-        b.reportAllResults();
+        b.report();
+
+        Map<Integer, List<Integer>> targetMap = new Map<Integer, List<Integer>>();
+
+        BenchmarkUtilTest b2 = new BenchmarkUtilTest();
+
+        b2.start();
+
+        for (Integer i = 0; i < loops; i++) {
+            if (targetMap.get(i) == null) {
+                targetMap.put(i, new List<Integer>());
+            }
+
+            targetMap.get(i).add(i);
+        }
+        b2.end();
+
+        b2.report();
+
     }
 }
