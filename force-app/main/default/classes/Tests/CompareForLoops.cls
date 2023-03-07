@@ -4,7 +4,7 @@ public class CompareForLoops {
     @TestSetup
     static void makeData() {
         List<Account> accounts = new List<Account>();
-        for (Integer i = 0; i < 8000; i++) {
+        for (Integer i = 0; i < 5000; i++) {
             accounts.add(new Account(Name = 'Test ' + i));
         }
         insert accounts;
@@ -12,7 +12,7 @@ public class CompareForLoops {
 
     @IsTest
     static void compare() {
-        Integer loops = 2;
+        Integer loops = 3;
         BenchmarkUtilTest b = new BenchmarkUtilTest();
 
         b.start(0);
