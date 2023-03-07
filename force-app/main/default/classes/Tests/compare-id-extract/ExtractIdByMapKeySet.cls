@@ -1,6 +1,6 @@
-//sfdx force:apex:test:run --tests "CompareIdExtract.compare"
+//sfdx force:apex:test:run --tests "ExtractIdByMapKeySet.compare"
 @IsTest
-public class CompareIdExtract {
+public class ExtractIdByMapKeySet {
     @TestSetup
     static void makeData() {
         List<Account> accounts = new List<Account>();
@@ -17,21 +17,12 @@ public class CompareIdExtract {
 
         List<Account> accounts = [SELECT Id FROM Account]; // 5000
 
-        b.start(0);
-        for (Integer i = 0; i < loops; i++) {
-            Set<Id> ids = new Set<Id>();
-            for (Account acc : accounts) {
-                ids.add(acc.Id);
-            }
-        }
-        b.end(0);
-
-        b.start(1);
+        b.start();
         for (Integer i = 0; i < loops; i++) {
             Set<Id> ids = new Map<Id, Account>(accounts).keySet();
         }
-        b.end(1);
+        b.end();
 
-        b.reportAllResults();
+        b.report();
     }
 }

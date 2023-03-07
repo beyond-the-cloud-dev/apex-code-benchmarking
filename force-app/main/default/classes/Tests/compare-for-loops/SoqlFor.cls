@@ -15,9 +15,9 @@ public class SoqlFor {
         BenchmarkUtilTest b = new BenchmarkUtilTest();
 
         b.start();
-            for (Account acc : [SELECT Name FROM Account]) {
-                System.debug(acc.Name);
-            }
+        for (Account acc : [SELECT Name FROM Account]) {
+            System.debug(acc.Name);
+        }
         b.end();
 
         b.report();
