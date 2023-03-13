@@ -1,4 +1,3 @@
-@IsTest
 public class BenchmarkUtilTest {
     private Integer startCpuTime;
     private Integer endCpuTime;
@@ -30,5 +29,11 @@ public class BenchmarkUtilTest {
     public String reportHeapSize() {
         Integer usedHeapSize = (endHeapSize - startHeapSize) / 1024; //KB
         return 'Used Heap Size [KB]: ' + usedHeapSize;
+    }
+
+    public static void report(List<BenchmarkUtilTest> benchmarks) {
+        for (BenchmarkUtilTest benchmark : benchmarks) {
+            benchmark.report();
+        }
     }
 }

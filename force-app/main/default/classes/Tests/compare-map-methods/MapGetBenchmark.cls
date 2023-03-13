@@ -5,11 +5,11 @@ public class MapGetBenchmark {
     static void compare() {
         Integer loops = 100000;
 
-        BenchmarkUtilTest b = new BenchmarkUtilTest();
+        BenchmarkUtilTest getBenchmark = new BenchmarkUtilTest();
 
         Map<Integer, List<Integer>> referenceMap = new Map<Integer, List<Integer>>();
 
-        b.start();
+        getBenchmark.start();
         for (Integer i = 0; i < loops; i++) {
             if (referenceMap.get(i) == null) {
                 referenceMap.put(i, new List<Integer>());
@@ -17,8 +17,8 @@ public class MapGetBenchmark {
 
             referenceMap.get(i).add(i);
         }
-        b.end();
+        getBenchmark.end();
 
-        b.report();
+        getBenchmark.report();
     }
 }
