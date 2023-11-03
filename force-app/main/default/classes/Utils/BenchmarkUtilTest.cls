@@ -1,42 +1,39 @@
-@IsTest
-public with sharing class BenchmarkUtilTest {
+public class BenchmarkUtilTest {
+    private Integer startCpuTime;
+    private Integer endCpuTime;
+    private Integer startHeapSize;
+    private Integer endHeapSize;
 
-    private static Integer referenceStartTime;
-    private static Integer referenceEndTime;
-    private static Integer targetStartTime;
-    private static Integer targetEndTime;
-
-    public void markReferenceStartTime() {
-        referenceStartTime = Limits.getCpuTime();
+    public void start() {
+        startCpuTime = Limits.getCpuTime();
+        startHeapSize = Limits.getHeapSize();
     }
 
-    public void markReferenceEndTime() {
-        referenceEndTime = Limits.getCpuTime();
+    public void end() {
+        endCpuTime = Limits.getCpuTime();
+        endHeapSize = Limits.getHeapSize();
     }
 
-    public void markTargetStartTime() {
-        targetStartTime = Limits.getCpuTime();
-    }
-
-    public void markTargetEndTime() {
-        targetEndTime = Limits.getCpuTime();
-    }
-
-    public void reportResults(Integer loops) {
-        if(targetEndTime == null) {
-            this.markTargetEndTime();
-        }
-        Integer referenceDuration = referenceEndTime - referenceStartTime;
-        Integer targetDuration = targetEndTime - targetStartTime;
-        Integer benchmarkResults = targetDuration - referenceDuration;
-
-        Decimal singleOperationInMicroseconds = benchmarkResults * 1000;
-        singleOperationInMicroseconds /= loops;
-        singleOperationInMicroseconds.setScale(2);
+    public void report() {
         System.debug(LoggingLevel.Error,
-                '\nReference Duration: ' + referenceDuration +
-                        '\nTarget duration: ' + targetDuration +
-                        '\nBenchmark Results: ' + benchmarkResults +
-                        'ms or ' + singleOperationInMicroseconds + ' μs per operation');
+            '\n' + reportCpuTime() +
+            '\n' + reportHeapSize()
+        );
+    }
+
+    public String reportCpuTime() {
+        Integer duration = endCpuTime - startCpuTime;
+        return 'CPU Duration [ms]: ' + duration;
+    }
+
+    public String reportHeapSize() {
+        Integer usedHeapSize = (endHeapSize - startHeapSize) / 1024; //KB
+        return 'Used Heap Size [KB]: ' + usedHeapSize;
+    }
+
+    public static void report(List<BenchmarkUtilTest> benchmarks) {
+        for (BenchmarkUtilTest benchmark : benchmarks) {
+            benchmark.report();
+        }
     }
 }
